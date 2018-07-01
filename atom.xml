@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Jason Xie的个人博客</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://fenglu09.github.io/"/>
+  <updated>2018-07-01T08:25:20.657Z</updated>
+  <id>https://fenglu09.github.io/</id>
+  
+  <author>
+    <name>Jason Xie</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React-native采坑</title>
+    <link href="https://fenglu09.github.io/2018/07/01/rn-normal-error/"/>
+    <id>https://fenglu09.github.io/2018/07/01/rn-normal-error/</id>
+    <published>2018-07-01T06:59:45.000Z</published>
+    <updated>2018-07-01T08:25:20.657Z</updated>
+    
+    <content type="html"><![CDATA[<font face="Menlo"><br><br>1. 键盘遮挡问题: 使用插件<code>react-native-keyboard-aware-scroll-view</code><br><br>2. Android端<code>border dashed/dotted</code> 不起作用，解决办法：设置<code>borderRadius</code>,设置后起作用。<br><br>3. iOS中，设置横屏后，只要显示Modal就报错和闪退。<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Exception thrown while executing UI block: Supported orientations has no common orientation with the         </span><br><span class="line">application, and [RCTModalHostViewController shouldAutorotate] is returning YES</span><br></pre></td></tr></table></figure><br><br>原因：Modal支持的屏幕方向中没有横屏。<br>解决办法：在Modal上添加 <code>supportedOrientations</code> 属性即可。<br><code>supportedOrientations={[&#39;portrait&#39;, &#39;landscape&#39;, &#39;landscape-left&#39;, &#39;landscape-right&#39;]}</code><br><br>4. 在自己写Native组件的时候，iOS引入进去后，会报错<code>library not found for xxx.a</code>的错误。<br><br>解决：<br><br>    1. 检查模块有没有导入<br><br>    2. 检查<code>build phases</code>中，是否有引入包，<br><br>    3. 如果使用了pod，删除<code>Podfile</code>, <code>Pods</code>, <code>Podfile.lock</code>,  然后重新运行<code>pod install</code>。<br><br><br><br>5. <code>TextInput</code>在Android的上面默认有一个underline，设置为<code>underlineColorAndroid=&quot;transparent&quot;</code>。但是设置高度后，会出现如下的效果。<br><img src="./img/41668601.png" alt=""><br><br>给<code>TextInput</code>设置<code>paddingVertical: 0</code>后，可解决<br><img src="./img/41691255.png" alt=""><br><br><br>6. 自己写的组件,iOS 中debug build没问题，archive的时候就报错，找不到lib<br><br><img src="./img/58757502.png" alt=""><br><br>   解决办法，在找不到的那个静态库中，<code>build settings</code> 中的<code>target device family</code>改成<code>1</code>，默认是<code>1,2</code>，将<code>iOS deployment target</code> 改成9就好了<br><img src="./img/58856031.png" alt=""><br><br>7. iOS真机运行编译失败<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Undefined symbols for architecture arm64:</span><br><span class="line">&quot;_RCTSetLogFunction&quot;, referenced from:</span><br><span class="line">-[PropertyFinderTests testRendersWelcomeScreen] in PropertyFinderTests.o</span><br></pre></td></tr></table></figure><br><br>解决办法: 选择<code>TargetNameTest</code>， <code>Build Phases</code>-&gt; <code>Link Binary With Libraries</code> 在添加<code>libReact.a</code>即可<br><br></font>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;font face=&quot;Menlo&quot;&gt;&lt;br&gt;&lt;br&gt;1. 键盘遮挡问题: 使用插件&lt;code&gt;react-native-keyboard-aware-scroll-view&lt;/code&gt;&lt;br&gt;&lt;br&gt;2. Android端&lt;code&gt;border dashed/dotted&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="React-native" scheme="https://fenglu09.github.io/tags/React-native/"/>
+    
+  </entry>
+  
+</feed>
